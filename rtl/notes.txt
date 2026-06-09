@@ -1,0 +1,42 @@
+- bit vs logic:
+	- Both represents 2 states (0 or 1) after synthesize to hardware but logic represents 4 states in simulation 
+	(0, 1, X, and Z), which is helpful in debugging for example, uninitialized registers. Therefore always use logic
+	in rtl and bit sometimes in TB classes/randomization.
+
+
+- int vs logic:
+
+(1)
+- 	module example #(
+		parameter int unsigned WIDTH = 8
+	)(
+		input  logic [WIDTH-1:0] data
+	);
+
+WIDTH is a compile-time constant, not an actual 32-bit register, therefore known before hardware is built. 
+
+
+(2)
+-  	int count;
+
+		VS.
+
+-	localparam int unsigned CNT_MAX = 434;
+	localparam int unsigned CNT_WIDTH = $clog2(CNT_MAX + 1);
+	logic [CNT_WIDTH-1:0] count;
+
+'int count' synthesizes as a 'logic [31:0] count' rather than 'logic [8:0] count'.
+
+
+	- int = logic [31:0]
+	- int unsigned = [  0  :2^32]
+	- int signed   = [-2^31:2^31]
+
+
+
+/******************************************************************************************************/
+
+localparam vs parameter:
+
+parameter can be overridden during module instantiation, whereas a localparam is a local constant that is 
+locked inside the module and cannot be directly changed by external parent modules.

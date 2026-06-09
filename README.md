@@ -8,4 +8,7 @@ Implementation of a full-duplex Universal Asynchronous Receiver/Transmitter (UAR
 - A frame starts with a start bit followed by the LsB of the data bits. After the the MsB data bit has been transmitted, the parity bit is inserted after the data bits. The stop bits after the parity bits mark the completion of a single frame.
 - When transmission is not taking place on the serial connection, the line is set to an idle (HIGH) state.
 
-<img src="images/UART-Controller\images\ATmega128 Datasheet - frame format.png" width="80%">
+
+### UART Frame Formatting based on ATmega128:
+
+<img src="images\ATmega128 Datasheet - frame format.png" width="100%">
